@@ -13,5 +13,5 @@ export  function moviesReducer(state = defaultState, action) {
     return state
 }
 
-export const setUsers = payload => ({type: SET_MOVIES, payload})
-export const fetchUsers = () => ({type: FETCH_MOVIES})
+export const setMovies = payload => ({type: SET_MOVIES, payload})
+export const fetchMovies = () => ({type: FETCH_MOVIES})

@@ -1,21 +1,13 @@
 import { put, takeEvery, call } from "redux-saga/effects"
-import { FETCH_MOVIES, setUsers } from "../reducers/moviesReducer";
+import { ky } from "../../api";
+import { FETCH_MOVIES, setMovies } from "../reducers/moviesReducer";
 
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': import.meta.env.VITE_X_RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
-};
-
-const fetchMovies = () => fetch('https://moviesdatabase.p.rapidapi.com/titles', options)
-
+const fetchMovies = () => ky('movie/popular/')
 
 function* fetchMoviesWorker() {
     const data = yield call(fetchMovies)
     const json = yield call(() => new Promise(res => res(data.json())))
-    yield put(setUsers(json))
+    yield put(setMovies(json))
 }
 
 export function* moviesWatcher() {
