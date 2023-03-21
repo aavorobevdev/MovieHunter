@@ -1,1 +1,3 @@
-export const moviesSelector = (state: any) => state.movies;
+import { RootState } from "../reducers";
+
+export const moviesSelector = (state: RootState) => state.moviesReducer.movies;
