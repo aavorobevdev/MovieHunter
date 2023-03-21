@@ -1,19 +1,21 @@
 import React, { useEffect } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { MovieCard } from "./components/movie-card"
 import { fetchMovies } from "./store/reducers/moviesReducer"
+import { moviesSelector } from "./store/selectors/movies"
 
 
 function App() {
-  const dispatch = useDispatch()
+  const movies = useSelector(moviesSelector);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovies())
+    dispatch(fetchMovies());
   }, [])
-
 
   return (
     <div className="App">
-      test
+      {!!movies.length && movies.map((movie) => <MovieCard movie={movie} />)}
     </div>
   )
 }

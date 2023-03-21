@@ -7,7 +7,8 @@ const fetchMovies = () => ky('movie/popular/')
 function* fetchMoviesWorker() {
     const data = yield call(fetchMovies)
     const json = yield call(() => new Promise(res => res(data.json())))
-    yield put(setMovies(json))
+    const { results } = yield call(() => json)
+    yield put(setMovies(results))
 }
 
 export function* moviesWatcher() {
