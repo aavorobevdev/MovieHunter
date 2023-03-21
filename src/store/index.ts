@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga'
 import { rootWatcher } from "./sagas";
-import { moviesReducer } from './reducers/moviesReducer'
+import { rootReducer } from './reducers';
 
 
 const SagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: moviesReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({ thunk: false }).prepend(SagaMiddleware);
   },

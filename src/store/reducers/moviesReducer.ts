@@ -1,6 +1,7 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Movie, MoviesState } from "../../types/movies"
 
-const defaultState:MoviesState = {
+const initialState: MoviesState = {
     movies: [],
     isLoading: false,
     error: null,
@@ -10,13 +11,18 @@ const defaultState:MoviesState = {
 export const SET_MOVIES = "SET_MOVIES"
 export const FETCH_MOVIES = "FETCH_MOVIES"
 
-export function moviesReducer(state = defaultState, action: {type:string, payload: Movie[] }) {
-    switch (action.type) {
-        case SET_MOVIES:
-            return { ...state, movies: action.payload }
-    }
-    return state
-}
+const moviesSlice = createSlice({
+    name: "movies",
+    initialState,
+    reducers: {
+        setMovies(state, action: PayloadAction<Movie[]>) {
+            state.movies = action.payload;
+        },
+    },
+});
 
-export const setMovies = payload => ({ type: SET_MOVIES, payload })
+export const { setMovies } = moviesSlice.actions;
+
+export default moviesSlice.reducer;
+
 export const fetchMovies = () => ({ type: FETCH_MOVIES })
