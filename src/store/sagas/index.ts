@@ -1,7 +1,6 @@
-import { all } from "redux-saga/effects"
-import { moviesWatcher } from "./moviesSaga"
-
+import { all } from "redux-saga/effects";
+import { moviesWatcher } from "./moviesSaga";
 
 export function* rootWatcher() {
-    yield all([moviesWatcher()])
+  yield all([moviesWatcher()]);
 }
