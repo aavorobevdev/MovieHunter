@@ -1,14 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { store } from "./store";
 import App from "./App";
-import "./index.css";
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: "#100e19",
+        color: "white",
+      },
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
   </Provider>

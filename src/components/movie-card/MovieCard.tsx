@@ -1,47 +1,26 @@
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  Divider,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
 import React, { FC } from "react";
+import { Box, Card, CardBody, Heading, Image, Stack } from "@chakra-ui/react";
+import { Movie } from "../../types/movies";
 
-type MovieCardProps = { movie: any };
+type MovieCardProps = { movie: Movie; width: string; height: string };
 
-export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
-  const { overview, title, original_language, poster_path } = movie;
+export const MovieCard: FC<MovieCardProps> = ({ movie, width, height }) => {
+  const { overview, title, original_language, poster_path, vote_average } =
+    movie;
 
-  console.log(overview, title, original_language, poster_path);
   return (
-    <Card maxW="sm">
-      <CardBody>
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={title}
-          borderRadius="lg"
-        />
-        <Stack mt="6" spacing="3">
-          <Heading size="md">{title}</Heading>
-          <Text>{overview}</Text>
-        </Stack>
-      </CardBody>
-      <Divider />
-      <CardFooter>
-        <ButtonGroup spacing="2">
-          <Button variant="solid" colorScheme="blue">
-            Watch now
-          </Button>
-          <Button variant="ghost" colorScheme="blue">
-            Add in favorites
-          </Button>
-        </ButtonGroup>
-      </CardFooter>
-    </Card>
+    <Stack width={width} height={height} spacing={2}>
+      <Card maxW="sm" overflow="hidden">
+        <CardBody color="white" padding={0} borderRadius="lg">
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+            alt={title}
+          />
+        </CardBody>
+      </Card>
+      <Heading mt="10px" size="md" color="white">
+        {title}
+      </Heading>
+    </Stack>
   );
 };
